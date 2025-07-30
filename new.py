@@ -8,4 +8,3 @@ for num in nums:
         break
 else:
     print("Loop completed")
-    
