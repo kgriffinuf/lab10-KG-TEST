@@ -13,14 +13,28 @@ class TestCalculator(unittest.TestCase):
 
     ####### Partner 1
     def test_multiply(self): # 3 assertions
+        # check if the results are equal to the expected
         expected = self.a * self.b
         result = self.mul
-        return self.assertEqual(result, expected)
+        self.assertEqual(result, expected)
+
+        # check if result is an integer
+        self.assertIsInstance(result, int)
+
+        # verify if the product(result) is greater than both variables a and b
+        self.assertTrue(result >= self.a and result >= self.b)
 
     def test_divide(self): # 3 assertions
-        expected = self.a / self.b
+        # ensure a is not equal to zero
+        assert self.a != 0, "Zero Division Error"
+
+        # ensure the result of div method is equal to the expected
+        expected = self.b / self.a
         result = self.div
-        return self.assertEqual(result, expected)
+        self.assertEqual(result, expected)
+
+        # ensure the result is a float
+        self.assertIsInstance(result, float)
     #########################
 
     ######## Partner 2
@@ -41,7 +55,7 @@ class TestCalculator(unittest.TestCase):
     ####### Partner 1
     def test_log_invalid_argument(self): # 1 assertion
         with self.assertRaises(ValueError):
-            math.logarithm(self.a, self.b)
+            math.log(self.a, self.b)
         # call log function inside, example:
         # with self.assertRaises(<INSERT_ERROR_TYPE>):
         #     logarithm(0, 5)
@@ -53,7 +67,7 @@ class TestCalculator(unittest.TestCase):
             self.b != 0
         expected = math.hypot(self.a, self.b)
         result = self.hypotenuse
-        return self.assertEqual(result, expected)
+        self.assertEqual(result, expected)
 
 
     def test_sqrt(self): # 3 assertions
@@ -61,12 +75,19 @@ class TestCalculator(unittest.TestCase):
         # with self.assertRaises(<INSERT_ERROR_TYPE>):
         #    square_root(NUM)
         # Test basic function
+        expected = math.sqrt(self.a)
+        result = math.sqrt(self.a)
+
+        # a is greater than zero
         with self.assertRaises(ValueError):
             self.a < 0
+
+        # result is a float
+        self.assertIsInstance(result, float)
+
+        # value error for assertRaises
         with self.assertRaises(ValueError):
-            self.b < 0
-        with self.assertRaises(ValueError):
-            math.square_root(self.a, self.b)
+            math.sqrt(self.a, self.b)
 
     #########################
 
